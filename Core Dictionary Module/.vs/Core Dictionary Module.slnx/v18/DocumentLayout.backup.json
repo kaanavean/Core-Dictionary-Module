@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Core Dictionary Module\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EC360196-24D4-4330-867C-723BA6664B95}|Core Dictionary Module\\Core Dictionary Module.vbproj|c:\\users\\deniz\\documents\\github\\core-dictionary-module\\core dictionary module\\core dictionary module\\main.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{EC360196-24D4-4330-867C-723BA6664B95}|Core Dictionary Module\\Core Dictionary Module.vbproj|solutionrelative:core dictionary module\\main.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{3DAF9628-64BA-C9E0-F095-818E4318BC6B}|Core Dictionary Module\\Core Dictionary Module.vbproj|c:\\users\\deniz\\documents\\github\\core-dictionary-module\\core dictionary module\\core dictionary module\\main.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{3DAF9628-64BA-C9E0-F095-818E4318BC6B}|Core Dictionary Module\\Core Dictionary Module.vbproj|solutionrelative:core dictionary module\\main.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC360196-24D4-4330-867C-723BA6664B95}|Core Dictionary Module\\Core Dictionary Module.vbproj|c:\\users\\deniz\\documents\\github\\core-dictionary-module\\core dictionary module\\core dictionary module\\core dictionary module.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{EC360196-24D4-4330-867C-723BA6664B95}|Core Dictionary Module\\Core Dictionary Module.vbproj|solutionrelative:core dictionary module\\core dictionary module.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{3DAF9628-64BA-C9E0-F095-818E4318BC6B}|Core Dictionary Module\\Core Dictionary Module.vbproj|c:\\users\\deniz\\documents\\github\\core-dictionary-module\\core dictionary module\\core dictionary module\\core dictionary module.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3DAF9628-64BA-C9E0-F095-818E4318BC6B}|Core Dictionary Module\\Core Dictionary Module.vbproj|solutionrelative:core dictionary module\\core dictionary module.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,15 +23,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Core Dictionary Module",
+              "Title": "Core Dictionary Module.vbproj",
               "DocumentMoniker": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Core Dictionary Module\\Core Dictionary Module\\Core Dictionary Module.vbproj",
               "RelativeDocumentMoniker": "Core Dictionary Module\\Core Dictionary Module.vbproj",
               "ToolTip": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Core Dictionary Module\\Core Dictionary Module\\Core Dictionary Module.vbproj",
               "RelativeToolTip": "Core Dictionary Module\\Core Dictionary Module.vbproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003380|",
-              "WhenOpened": "2026-01-09T21:14:00.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T21:14:00.118Z"
             },
             {
               "$type": "Document",
@@ -41,7 +40,7 @@
               "RelativeDocumentMoniker": "Core Dictionary Module\\Main.vb",
               "ToolTip": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Core Dictionary Module\\Core Dictionary Module\\Main.vb*",
               "RelativeToolTip": "Core Dictionary Module\\Main.vb*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAcwGMAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2026-01-09T21:13:45.36Z",
               "EditorCaption": ""

@@ -9,3 +9,4 @@ C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Core Dictionary Module\Co
 C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Core Dictionary Module\Core Dictionary Module\obj\Debug\net6.0-windows\refint\Core Dictionary Module.dll
 C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Core Dictionary Module\Core Dictionary Module\obj\Debug\net6.0-windows\Core Dictionary Module.pdb
 C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Core Dictionary Module\Core Dictionary Module\obj\Debug\net6.0-windows\ref\Core Dictionary Module.dll
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Core Dictionary Module\Core Dictionary Module\obj\Debug\net6.0-windows\Core Dictionary Module.sourcelink.json
