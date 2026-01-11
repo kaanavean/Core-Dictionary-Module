@@ -43,7 +43,7 @@ Public Class Main
     'Issues could arrise because of the result being an object, manual fix might be required
     'See the readme for a solution
 
-    Public Enum ObjectType
+    Public Enum ObjectLevel
         SysApps
         SysExt
         Root
@@ -54,11 +54,11 @@ Public Class Main
         Dim path As String = String.Empty
 
         ' Determine the correct path based on the ObjectType
-        If ObjectType.SysApps Then
+        If ObjectLevel.SysApps Then
             path = systemPath & "SYSTEM_APPLICATION\"
-        ElseIf ObjectType.SysExt Then
+        ElseIf ObjectLevel.SysExt Then
             path = systemPath & "SYSTEM_EXTENSION\"
-        ElseIf ObjectType.Root Then
+        ElseIf ObjectLevel.Root Then
             path = systemPath
         End If
 
@@ -131,11 +131,11 @@ Public Class Main
         Dim path As String = String.Empty
 
         ' Determine the correct path based on the ObjectType
-        If ObjectType.SysApps Then
+        If ObjectLevel.SysApps Then
             path = systemPath & "SYSTEM_APPLICATION\"
-        ElseIf ObjectType.SysExt Then
+        ElseIf ObjectLevel.SysExt Then
             path = systemPath & "SYSTEM_EXTENSION\"
-        ElseIf ObjectType.Root Then
+        ElseIf ObjectLevel.Root Then
             path = systemPath
         End If
 
@@ -153,5 +153,127 @@ Public Class Main
         Catch ex As Exception
             Return False
         End Try
+
+    End Function
+
+
+    ' Create an object (file) based on its type
+    ' Endings are automatically added based on the object type
+    ' Content is optional and can be left empty
+
+    Public Enum ObjectType
+        StringObject
+        IntegerObject
+        BooleanObject
+    End Enum
+
+    Public Function CreateObject(objectName As String, path As String, objectType As ObjectType, Optional content As Object = "") As Boolean
+        If objectType = ObjectType.BooleanObject Then
+            Dim fullPath As String = IO.Path.Combine(path, objectName & ".sta")
+            If content = Not Nothing Then
+                Return MWrite_Boolean(fullPath, CType(content, Boolean))
+            End If
+        ElseIf objectType = ObjectType.IntegerObject Then
+            Dim fullPath As String = IO.Path.Combine(path, objectName & ".val")
+            If content = Not Nothing Then
+                Return MWrite_Integer(fullPath, CType(content, Integer))
+            End If
+        ElseIf objectType = ObjectType.StringObject Then
+            Dim fullPath As String = IO.Path.Combine(path, objectName & ".word")
+            If content = Not Nothing Then
+                Return MWrite_String(fullPath, CType(content, String))
+            End If
+        Else
+            Return False
+        End If
+
+        Return False
+    End Function
+
+    ' Rename an object (file) based on its type
+    ' Files named incorrectly or with the wrong extension will not be renamed
+
+
+    Public Function RenameObject(currentName As String, newName As String) As Boolean
+        Try
+            If currentName.EndsWith(".sta") Then
+                If File.Exists(currentName) Then
+                    Dim content As Object = File.ReadAllText(currentName)
+                    If TypeOf content Is Boolean Then
+                        Try
+                            Rename(currentName, newName)
+                            Return True
+                        Catch ex As Exception
+                            Return False
+                        End Try
+                    End If
+                End If
+            ElseIf currentName.EndsWith(".val") Then
+                If File.Exists(currentName) Then
+                    Dim content As Object = File.ReadAllText(currentName)
+                    If TypeOf content Is Integer Then
+                        Try
+                            Rename(currentName, newName)
+                            Return True
+                        Catch ex As Exception
+                            Return False
+                        End Try
+                    End If
+                End If
+            ElseIf currentName.EndsWith(".word") Then
+                If File.Exists(currentName) Then
+                    Dim content As Object = File.ReadAllText(currentName)
+                    If TypeOf content Is String Then
+                        Try
+                            Rename(currentName, newName)
+                            Return True
+                        Catch ex As Exception
+                            Return False
+                        End Try
+                    End If
+                End If
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+
+        Return False
+    End Function
+
+
+    ' Get a tree of all files and directories within a specified path
+
+
+    Public Function MGetTree(path As String) As List(Of String)
+        Dim result As New List(Of String)
+        If Directory.Exists(path) Then
+            Dim directories As String() = Directory.GetDirectories(path, "*", SearchOption.AllDirectories)
+            Dim files As String() = Directory.GetFiles(path, "*", SearchOption.AllDirectories)
+            result.AddRange(directories)
+            result.AddRange(files)
+        End If
+
+        Return result
+    End Function
+
+    ' XELA support is not provided for AutoGetTree function
+    ' A new tree for MELA and XELA is being designed
+
+    Public Function AutoGetTree(type As ObjectType) As List(Of String)
+        Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word") 'Use MELA system path as standard
+        Dim path As String = String.Empty
+
+        ' Determine the correct path based on the ObjectType
+        If ObjectLevel.SysApps Then
+            path = systemPath & "SYSTEM_APPLICATION\"
+        ElseIf ObjectLevel.SysExt Then
+            path = systemPath & "SYSTEM_EXTENSION\"
+        ElseIf ObjectLevel.Root Then
+            path = systemPath
+        End If
+
+        Return MGetTree(path)
     End Function
 End Class
