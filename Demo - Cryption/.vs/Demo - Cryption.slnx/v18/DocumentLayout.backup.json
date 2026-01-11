@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Demo - Cryption\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{24B59E75-6DD4-455D-AC47-22836874A4A7}|Demo - Cryption\\Demo - Cryption.vbproj|c:\\users\\deniz\\documents\\github\\core-dictionary-module\\demo - cryption\\demo - cryption\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{24B59E75-6DD4-455D-AC47-22836874A4A7}|Demo - Cryption\\Demo - Cryption.vbproj|solutionrelative:demo - cryption\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{24B59E75-6DD4-455D-AC47-22836874A4A7}|Demo - Cryption\\Demo - Cryption.vbproj|c:\\users\\deniz\\documents\\github\\core-dictionary-module\\demo - cryption\\demo - cryption\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{24B59E75-6DD4-455D-AC47-22836874A4A7}|Demo - Cryption\\Demo - Cryption.vbproj|solutionrelative:demo - cryption\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.vb",
+              "DocumentMoniker": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Demo - Cryption\\Demo - Cryption\\Form1.vb",
+              "RelativeDocumentMoniker": "Demo - Cryption\\Form1.vb",
+              "ToolTip": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Demo - Cryption\\Demo - Cryption\\Form1.vb*",
+              "RelativeToolTip": "Demo - Cryption\\Form1.vb*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-01-09T22:11:22.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.vb [Entwurf]",
+              "DocumentMoniker": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Demo - Cryption\\Demo - Cryption\\Form1.vb",
+              "RelativeDocumentMoniker": "Demo - Cryption\\Form1.vb",
+              "ToolTip": "C:\\Users\\deniz\\Documents\\GitHub\\Core-Dictionary-Module\\Demo - Cryption\\Demo - Cryption\\Form1.vb [Entwurf]*",
+              "RelativeToolTip": "Demo - Cryption\\Form1.vb [Entwurf]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-01-09T22:11:15.904Z",
+              "EditorCaption": " [Entwurf]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

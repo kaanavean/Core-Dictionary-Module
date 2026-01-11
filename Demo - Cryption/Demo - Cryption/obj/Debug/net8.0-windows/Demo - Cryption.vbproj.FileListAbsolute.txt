@@ -1,0 +1,20 @@
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.vbproj.AssemblyReference.cache
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo___Cryption.Form1.resources
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.vbproj.GenerateResource.cache
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.AssemblyInfoInputs.cache
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.AssemblyInfo.vb
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.vbproj.CoreCompileInputs.cache
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\bin\Debug\net8.0-windows\Demo - Cryption.exe
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\bin\Debug\net8.0-windows\Demo - Cryption.deps.json
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\bin\Debug\net8.0-windows\Demo - Cryption.runtimeconfig.json
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\bin\Debug\net8.0-windows\Demo - Cryption.dll
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\bin\Debug\net8.0-windows\Demo - Cryption.pdb
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\bin\Debug\net8.0-windows\Light-Term Encryption.dll
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\bin\Debug\net8.0-windows\Light-Term Encryption.pdb
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - C.B3C29246.Up2Date
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.dll
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\refint\Demo - Cryption.dll
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.pdb
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\Demo - Cryption.genruntimeconfig.cache
+C:\Users\deniz\Documents\GitHub\Core-Dictionary-Module\Demo - Cryption\Demo - Cryption\obj\Debug\net8.0-windows\ref\Demo - Cryption.dll
