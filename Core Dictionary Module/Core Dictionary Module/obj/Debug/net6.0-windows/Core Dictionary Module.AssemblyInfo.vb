@@ -17,7 +17,7 @@ Imports System.Reflection
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyCopyrightAttribute("KAVN / Kaan Divrikli (C) 2026"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("0.2.1.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.2.1+d3e6fa01bfa31110941ed92ccd0a11e28a196249"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.2.1+9c3fb2467730d078c579b574f2c9e682ea7135ce"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("Core Dictionary Module"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("Core Dictionary Module"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("0.2.1.0"),  _

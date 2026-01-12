@@ -1,4 +1,5 @@
 Imports System.IO
+Imports System.Windows.Forms
 
 Public Class Main
 
@@ -246,34 +247,124 @@ Public Class Main
     ' Get a tree of all files and directories within a specified path
 
 
+    Public Sub Tree(tv As TreeView, rootPath As String)
+        ' Hole alle Pfade über deine bestehende Funktion
+        Dim allPaths As List(Of String) = MGetTree(rootPath)
+
+        tv.Nodes.Clear()
+
+        ' Falls der Pfad nicht existiert, abbrechen
+        If Not Directory.Exists(rootPath) Then Return
+
+        ' Root-Knoten erstellen
+        Dim rootNode As New TreeNode(IO.Path.GetFileName(rootPath.TrimEnd("\"c)))
+        rootNode.Tag = rootPath ' Wir speichern den echten Pfad im Tag
+        tv.Nodes.Add(rootNode)
+
+        ' Liste der erlaubten Endungen
+        Dim allowedExtensions As String() = {".word", ".val", ".sta"}
+
+        For Each fullPath As String In allPaths
+            ' PRÜFUNG: Ist es ein Verzeichnis ODER eine Datei mit der richtigen Endung?
+            Dim isDirectory As Boolean = Directory.Exists(fullPath)
+            Dim extension As String = IO.Path.GetExtension(fullPath).ToLower()
+
+            ' Nur fortfahren, wenn es ein Ordner ist oder die Endung passt
+            If Not isDirectory AndAlso Not allowedExtensions.Contains(extension) Then
+                Continue For
+            End If
+
+            ' Berechne den relativen Pfad für die Baumstruktur
+            Dim relativePath As String = fullPath.Substring(rootPath.Length).TrimStart("\"c)
+            If String.IsNullOrEmpty(relativePath) Then Continue For
+
+            Dim parts As String() = relativePath.Split("\"c)
+            Dim currentNode As TreeNode = rootNode
+
+            For Each part As String In parts
+                ' Suche, ob der Knoten auf dieser Ebene bereits existiert
+                Dim existingNode As TreeNode = Nothing
+                For Each node As TreeNode In currentNode.Nodes
+                    If node.Text = part Then
+                        existingNode = node
+                        Exit For
+                    End If
+                Next
+
+                If existingNode Is Nothing Then
+                    ' Falls nicht vorhanden, neu anlegen
+                    Dim newNode As New TreeNode(part)
+                    newNode.Tag = fullPath ' Pfad für späteren Zugriff speichern
+                    currentNode.Nodes.Add(newNode)
+                    currentNode = newNode
+                Else
+                    ' Falls vorhanden, tiefer gehen
+                    currentNode = existingNode
+                End If
+            Next
+        Next
+
+        rootNode.Expand()
+    End Sub
+
+    ' Deine bestehende MGetTree Funktion
     Public Function MGetTree(path As String) As List(Of String)
         Dim result As New List(Of String)
         If Directory.Exists(path) Then
-            Dim directories As String() = Directory.GetDirectories(path, "*", SearchOption.AllDirectories)
-            Dim files As String() = Directory.GetFiles(path, "*", SearchOption.AllDirectories)
+            ' Sortierte Liste zurückgeben (hilft beim Aufbau des Baums)
+            Dim directories = Directory.GetDirectories(path, "*", SearchOption.AllDirectories).OrderBy(Function(x) x)
+            Dim files = Directory.GetFiles(path, "*", SearchOption.AllDirectories).OrderBy(Function(x) x)
             result.AddRange(directories)
             result.AddRange(files)
         End If
-
         Return result
     End Function
 
     ' XELA support is not provided for AutoGetTree function
     ' A new tree for MELA and XELA is being designed
 
-    Public Function AutoGetTree(type As ObjectType) As List(Of String)
-        Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word") 'Use MELA system path as standard
+    ''' <summary>
+    ''' Ermittelt automatisch den Pfad basierend auf dem ObjectLevel und befüllt das TreeView.
+    ''' </summary>
+    Public Sub AutoTree(tv As TreeView, level As ObjectLevel)
+        ' 1. Pfad ermitteln (Logik aus AutoGetTree übernommen)
+        Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word")
+        Dim targetPath As String = String.Empty
+
+        Select Case level
+            Case ObjectLevel.SysApps
+                targetPath = systemPath & "SYSTEM_APPLICATION\"
+            Case ObjectLevel.SysExt
+                targetPath = systemPath & "SYSTEM_EXTENSION\"
+            Case ObjectLevel.Root
+                targetPath = systemPath
+        End Select
+
+        ' 2. Falls der Pfad gültig ist, die bereits erstellte FillTreeView Logik nutzen
+        If Not String.IsNullOrEmpty(targetPath) AndAlso Directory.Exists(targetPath) Then
+            Tree(tv, targetPath)
+        Else
+            tv.Nodes.Clear()
+            tv.Nodes.Add("Pfad nicht gefunden: " & targetPath)
+        End If
+    End Sub
+
+    ' Korrigierte AutoGetTree Funktion
+    Public Function AutoGetTree(level As ObjectLevel) As List(Of String)
+        Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word")
         Dim path As String = String.Empty
 
-        ' Determine the correct path based on the ObjectType
-        If ObjectLevel.SysApps Then
-            path = systemPath & "SYSTEM_APPLICATION\"
-        ElseIf ObjectLevel.SysExt Then
-            path = systemPath & "SYSTEM_EXTENSION\"
-        ElseIf ObjectLevel.Root Then
-            path = systemPath
-        End If
+        ' Nutze Select Case für Enums - das ist sauberer und vermeidet Fehler
+        Select Case level
+            Case ObjectLevel.SysApps
+                path = systemPath & "SYSTEM_APPLICATION\"
+            Case ObjectLevel.SysExt
+                path = systemPath & "SYSTEM_EXTENSION\"
+            Case ObjectLevel.Root
+                path = systemPath
+        End Select
 
         Return MGetTree(path)
     End Function
+
 End Class
