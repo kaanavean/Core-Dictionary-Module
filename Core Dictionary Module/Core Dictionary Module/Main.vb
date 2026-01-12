@@ -168,24 +168,30 @@ Public Class Main
         BooleanObject
     End Enum
 
-    Public Function CreateObject(objectName As String, path As String, objectType As ObjectType, Optional content As Object = "") As Boolean
+    Public Function CreateObject(objectName As String, path As String, objectType As ObjectType, Optional content As Object = Nothing) As Boolean
+        ' Wir setzen den Standard auf Nothing statt auf ""
+
         If objectType = ObjectType.BooleanObject Then
             Dim fullPath As String = IO.Path.Combine(path, objectName & ".sta")
-            If content = Not Nothing Then
+            ' Nutze IsNot Nothing für Objekt-Vergleiche
+            If content IsNot Nothing Then
                 Return MWrite_Boolean(fullPath, CType(content, Boolean))
+            Else
+                Return MWrite_Boolean(fullPath, False) ' Default Wert
             End If
+
         ElseIf objectType = ObjectType.IntegerObject Then
             Dim fullPath As String = IO.Path.Combine(path, objectName & ".val")
-            If content = Not Nothing Then
+            If content IsNot Nothing Then
                 Return MWrite_Integer(fullPath, CType(content, Integer))
+            Else
+                Return MWrite_Integer(fullPath, 0) ' Default Wert
             End If
+
         ElseIf objectType = ObjectType.StringObject Then
             Dim fullPath As String = IO.Path.Combine(path, objectName & ".word")
-            If content = Not Nothing Then
-                Return MWrite_String(fullPath, CType(content, String))
-            End If
-        Else
-            Return False
+            ' Hier ist content meistens ein String oder Nothing
+            Return MWrite_String(fullPath, If(content IsNot Nothing, content.ToString(), ""))
         End If
 
         Return False
@@ -194,6 +200,32 @@ Public Class Main
     ' Rename an object (file) based on its type
     ' Files named incorrectly or with the wrong extension will not be renamed
 
+    Public Function EnhancedRename(oldPath As String, newNameWithoutExtension As String) As String
+        Try
+            If Not (File.Exists(oldPath) Or Directory.Exists(oldPath)) Then Return String.Empty
+
+            Dim parentDir As String = Path.GetDirectoryName(oldPath)
+            Dim finalPath As String = ""
+
+            If File.Exists(oldPath) Then
+                Dim ext As String = Path.GetExtension(oldPath)
+                Dim nameToUse As String = newNameWithoutExtension
+                If nameToUse.ToLower().EndsWith(ext.ToLower()) Then
+                    finalPath = Path.Combine(parentDir, nameToUse)
+                Else
+                    finalPath = Path.Combine(parentDir, nameToUse & ext)
+                End If
+                File.Move(oldPath, finalPath)
+            Else
+                finalPath = Path.Combine(parentDir, newNameWithoutExtension)
+                Directory.Move(oldPath, finalPath)
+            End If
+
+            Return finalPath
+        Catch ex As Exception
+            Return String.Empty
+        End Try
+    End Function
 
     Public Function RenameObject(currentName As String, newName As String) As Boolean
         Try
@@ -243,38 +275,25 @@ Public Class Main
         Return False
     End Function
 
-
-    ' Get a tree of all files and directories within a specified path
-
-
     Public Sub Tree(tv As TreeView, rootPath As String)
-        ' Hole alle Pfade über deine bestehende Funktion
         Dim allPaths As List(Of String) = MGetTree(rootPath)
-
         tv.Nodes.Clear()
-
-        ' Falls der Pfad nicht existiert, abbrechen
         If Not Directory.Exists(rootPath) Then Return
 
-        ' Root-Knoten erstellen
         Dim rootNode As New TreeNode(IO.Path.GetFileName(rootPath.TrimEnd("\"c)))
-        rootNode.Tag = rootPath ' Wir speichern den echten Pfad im Tag
+        rootNode.Tag = rootPath
         tv.Nodes.Add(rootNode)
 
-        ' Liste der erlaubten Endungen
         Dim allowedExtensions As String() = {".word", ".val", ".sta"}
 
         For Each fullPath As String In allPaths
-            ' PRÜFUNG: Ist es ein Verzeichnis ODER eine Datei mit der richtigen Endung?
             Dim isDirectory As Boolean = Directory.Exists(fullPath)
             Dim extension As String = IO.Path.GetExtension(fullPath).ToLower()
 
-            ' Nur fortfahren, wenn es ein Ordner ist oder die Endung passt
             If Not isDirectory AndAlso Not allowedExtensions.Contains(extension) Then
                 Continue For
             End If
 
-            ' Berechne den relativen Pfad für die Baumstruktur
             Dim relativePath As String = fullPath.Substring(rootPath.Length).TrimStart("\"c)
             If String.IsNullOrEmpty(relativePath) Then Continue For
 
@@ -282,7 +301,6 @@ Public Class Main
             Dim currentNode As TreeNode = rootNode
 
             For Each part As String In parts
-                ' Suche, ob der Knoten auf dieser Ebene bereits existiert
                 Dim existingNode As TreeNode = Nothing
                 For Each node As TreeNode In currentNode.Nodes
                     If node.Text = part Then
@@ -292,13 +310,11 @@ Public Class Main
                 Next
 
                 If existingNode Is Nothing Then
-                    ' Falls nicht vorhanden, neu anlegen
                     Dim newNode As New TreeNode(part)
-                    newNode.Tag = fullPath ' Pfad für späteren Zugriff speichern
+                    newNode.Tag = fullPath
                     currentNode.Nodes.Add(newNode)
                     currentNode = newNode
                 Else
-                    ' Falls vorhanden, tiefer gehen
                     currentNode = existingNode
                 End If
             Next
@@ -307,11 +323,9 @@ Public Class Main
         rootNode.Expand()
     End Sub
 
-    ' Deine bestehende MGetTree Funktion
     Public Function MGetTree(path As String) As List(Of String)
         Dim result As New List(Of String)
         If Directory.Exists(path) Then
-            ' Sortierte Liste zurückgeben (hilft beim Aufbau des Baums)
             Dim directories = Directory.GetDirectories(path, "*", SearchOption.AllDirectories).OrderBy(Function(x) x)
             Dim files = Directory.GetFiles(path, "*", SearchOption.AllDirectories).OrderBy(Function(x) x)
             result.AddRange(directories)
@@ -323,48 +337,22 @@ Public Class Main
     ' XELA support is not provided for AutoGetTree function
     ' A new tree for MELA and XELA is being designed
 
-    ''' <summary>
-    ''' Ermittelt automatisch den Pfad basierend auf dem ObjectLevel und befüllt das TreeView.
-    ''' </summary>
-    Public Sub AutoTree(tv As TreeView, level As ObjectLevel)
-        ' 1. Pfad ermitteln (Logik aus AutoGetTree übernommen)
-        Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word")
-        Dim targetPath As String = String.Empty
-
-        Select Case level
-            Case ObjectLevel.SysApps
-                targetPath = systemPath & "SYSTEM_APPLICATION\"
-            Case ObjectLevel.SysExt
-                targetPath = systemPath & "SYSTEM_EXTENSION\"
-            Case ObjectLevel.Root
-                targetPath = systemPath
-        End Select
-
-        ' 2. Falls der Pfad gültig ist, die bereits erstellte FillTreeView Logik nutzen
-        If Not String.IsNullOrEmpty(targetPath) AndAlso Directory.Exists(targetPath) Then
-            Tree(tv, targetPath)
-        Else
-            tv.Nodes.Clear()
-            tv.Nodes.Add("Pfad nicht gefunden: " & targetPath)
-        End If
-    End Sub
-
-    ' Korrigierte AutoGetTree Funktion
-    Public Function AutoGetTree(level As ObjectLevel) As List(Of String)
+    Public Function AutoTree(tv As TreeView, level As ObjectLevel) As String
         Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word")
         Dim path As String = String.Empty
 
-        ' Nutze Select Case für Enums - das ist sauberer und vermeidet Fehler
         Select Case level
-            Case ObjectLevel.SysApps
-                path = systemPath & "SYSTEM_APPLICATION\"
-            Case ObjectLevel.SysExt
-                path = systemPath & "SYSTEM_EXTENSION\"
-            Case ObjectLevel.Root
-                path = systemPath
+            Case ObjectLevel.SysApps : path = systemPath & "SYSTEM_APPLICATION\"
+            Case ObjectLevel.SysExt : path = systemPath & "SYSTEM_EXTENSION\"
+            Case ObjectLevel.Root : path = systemPath
         End Select
 
-        Return MGetTree(path)
+        Tree(tv, path)
+        Return path
     End Function
 
+    Public Function ManualTree(tv As TreeView, path As String) As String
+        Tree(tv, path)
+        Return path
+    End Function
 End Class
