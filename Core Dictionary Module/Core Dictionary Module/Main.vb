@@ -51,7 +51,7 @@ Public Class Main
     End Enum
 
     Public Function AutoRead(data As String) As Object 'Auto Path selection, for standard applications
-        Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word") 'Use MELA system path as standard
+        Dim systemPath As String = MRead_String("C:\KAVN\%xela.arc%\bin_path.word") 'Use MELA system path as standard
         Dim path As String = String.Empty
 
         ' Determine the correct path based on the ObjectType
