@@ -1,7 +1,7 @@
 Imports System.IO
 Imports System.Windows.Forms
 
-Public Class Main
+Public Class CDM
 
     'Manual read function is only used for special applications, not for standard XELA applications
     'Issues arrising using manual read functions in standard applications will not be supported and must be fixed by the creator of the application
@@ -128,7 +128,7 @@ Public Class Main
     ' See the readme for a solution
 
     Public Function AutoWrite(data As String, content As Object, type As ObjectType) As Boolean
-        Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word") 'Use MELA system path as standard
+        Dim systemPath As String = MRead_String("C:\KAVN\%xela.arc%\bin_path.word") 'Use MELA system path as standard
         Dim path As String = String.Empty
 
         ' Determine the correct path based on the ObjectType
@@ -169,15 +169,12 @@ Public Class Main
     End Enum
 
     Public Function CreateObject(objectName As String, path As String, objectType As ObjectType, Optional content As Object = Nothing) As Boolean
-        ' Wir setzen den Standard auf Nothing statt auf ""
-
         If objectType = ObjectType.BooleanObject Then
             Dim fullPath As String = IO.Path.Combine(path, objectName & ".sta")
-            ' Nutze IsNot Nothing für Objekt-Vergleiche
             If content IsNot Nothing Then
                 Return MWrite_Boolean(fullPath, CType(content, Boolean))
             Else
-                Return MWrite_Boolean(fullPath, False) ' Default Wert
+                Return MWrite_Boolean(fullPath, False)
             End If
 
         ElseIf objectType = ObjectType.IntegerObject Then
@@ -185,12 +182,11 @@ Public Class Main
             If content IsNot Nothing Then
                 Return MWrite_Integer(fullPath, CType(content, Integer))
             Else
-                Return MWrite_Integer(fullPath, 0) ' Default Wert
+                Return MWrite_Integer(fullPath, 0)
             End If
 
         ElseIf objectType = ObjectType.StringObject Then
             Dim fullPath As String = IO.Path.Combine(path, objectName & ".word")
-            ' Hier ist content meistens ein String oder Nothing
             Return MWrite_String(fullPath, If(content IsNot Nothing, content.ToString(), ""))
         End If
 
@@ -338,7 +334,7 @@ Public Class Main
     ' A new tree for MELA and XELA is being designed
 
     Public Function AutoTree(tv As TreeView, level As ObjectLevel) As String
-        Dim systemPath As String = MRead_String("C:\KAVN\%mela.arc%\bin_path.word")
+        Dim systemPath As String = MRead_String("C:\KAVN\%xela.arc%\bin_path.word")
         Dim path As String = String.Empty
 
         Select Case level
